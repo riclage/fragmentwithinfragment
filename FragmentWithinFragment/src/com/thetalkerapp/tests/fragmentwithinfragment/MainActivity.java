@@ -2,7 +2,6 @@ package com.thetalkerapp.tests.fragmentwithinfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -11,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MainActivity extends FragmentActivity {
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-	LeftFragment leftFragment;
+public class MainActivity extends SherlockFragmentActivity {
+
+	SingleTestQuestionView leftFragment;
 	MiddleFragment middleFragment;
 	
 	private MyAdapter mPagerAdapter;
@@ -63,7 +64,8 @@ public class MainActivity extends FragmentActivity {
 			switch (position){
 			case 0:
 				if (leftFragment == null) {
-					leftFragment = LeftFragment.newInstance();
+					TestPaperQuestion q = new TestPaperQuestion();
+					leftFragment = SingleTestQuestionView.newInstance(q);
 				}
 				return leftFragment;
 			case 1:
@@ -83,7 +85,7 @@ public class MainActivity extends FragmentActivity {
 			
 			switch(position) {
 				case 0:
-					LeftFragment left = (LeftFragment)super.instantiateItem(container, position);
+					SingleTestQuestionView left = (SingleTestQuestionView)super.instantiateItem(container, position);
 					return left;
 				case 1:
 					MiddleFragment middle = (MiddleFragment)super.instantiateItem(container, position);
